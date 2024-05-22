@@ -32,7 +32,7 @@ function convertToJpg(string $type, string $name): string
     return $basename . ".jpg";
 }
 
-function addWatermark(string $name): bool
+function addWatermark(string $name): void
 {
     $im = imagecreatefromjpeg("uploadsJpg/$name");
     $w = imagecreatefromjpeg("watermark.jpg");
@@ -42,7 +42,7 @@ function addWatermark(string $name): bool
 
     imagecopymerge($im, $w, imagesx($im) - $widthW, imagesy($im) - $heightW, 0, 0, $widthW, $heightW, 70);
 
-    return imagejpeg($im, "uploadsJpg/$name");
+    imagejpeg($im, "uploadsJpg/$name");
 }
 
 function convertToWebp(string $type, string $name): string
@@ -60,7 +60,7 @@ function convertToWebp(string $type, string $name): string
     return $basename . ".webp";
 }
 
-function resizeWebpImage(string $name): bool
+function resizeWebpImage(string $name): void
 {
     $im = imagecreatefromwebp("uploadsWebp/$name");
 
@@ -80,5 +80,5 @@ function resizeWebpImage(string $name): bool
     
     imagecopyresampled($newIm, $im, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-    return imagewebp($newIm, "uploadsWebp/$name");
+    imagewebp($newIm, "uploadsWebp/$name");
 }
